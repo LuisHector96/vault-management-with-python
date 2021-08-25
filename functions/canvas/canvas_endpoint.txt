@@ -1,0 +1,6 @@
+# Canvas endpoint
+# v2/business-application/APM0223552
+# v2/associated-assets?asset_akm_id=APM0223563
+# v1/associated-assets?CI_PROJECT_ID=19397766
+# .get('businessApps')[0].get('csdmNumber')
+# v2/employee-details?ntid=SNallus1

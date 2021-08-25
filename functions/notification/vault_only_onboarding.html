@@ -1,0 +1,49 @@
+<html>
+    <body>
+        <p><span style="font-family: Calibri, sans-serif;">Congratulations! Your asset <strong>{{ L2_APM_ID }} - {{ L2_Deployable_Unit_Name }}</strong> has been onboarded to the TEQ Enterprise Vault {{ ENV }} platform along with deployable unit(s) associated with GitLab repository and roles to allow corresponding pipelines to authenticate to Vault.</span><br></p>
+        <p><span style="font-family: Calibri, sans-serif;">Application secret(s) are stored in Vault. They can be found at follow locations</span></p>
+        <ul>
+            <li><span style="font-family: Calibri, sans-serif;">Shared path: <strong><em>tmobile/{{ L2_APM_ID }}/shared</em></strong></span></li>
+            <p><span style="font-family: Calibri, sans-serif;"><strong><u>Note:</u></strong> Secrets that are common across all deployable units of an application should be stored under <em>shared path</em>. Secrets specific to deployable unit should be stored under <em>deployable unit path</em>, so that they can be accessed ONLY by the onboarded deployable unit during build/deploy/run time.</span><br></p>
+            <li><span style="font-family: Calibri, sans-serif;">Deployable Unit Path(s)</span></li>
+                {% for L3_APM_ID in L3_list %}
+                    <li><span style="font-family: Calibri, sans-serif;">{{ L3_APM_ID["name"] }}: <strong><em>tmobile/{{ L2_APM_ID }}/{{ L3_APM_ID["id"] }}</em></strong></span></li>
+                {% endfor %}    
+            </ul>
+        </ul>
+        <p><span style="font-family: Calibri, sans-serif;">Access to Vault by human users is facilitated through <em>Okta Verify</em> process and controlled using membership to one or more <em>Active Directory security groups</em> associated with this application. As part of this onboarding, we have created requests for provisioning following security groups on your behalf. You should receive an email communication requesting your approval to create these groups in your <em>mailbox</em>, &nbsp;</span><br></p>
+        <ul>
+            <li><span style="font-family: Calibri, sans-serif;">Group Name: <strong><em>{{ tev_env_L2_APMDU_ID_adm }}</em></strong></span><br><span style="font-family: Calibri, sans-serif;">Purpose: Members of this security group will be able to,&nbsp;</span>
+                <ul>
+                    <li><span style="font-family: Calibri, sans-serif;">Create new secrets, new sub-path(s) under Vault path and Shared Path</span></li>
+                    <li><span style="font-family: Calibri, sans-serif;">Modify existing secrets under Vault and Shared paths and all their sub-paths</span></li>
+                    <li><span style="font-family: Calibri, sans-serif;">Delete existing secrets, sub-path(s) under Vault and Shared paths</span></li>
+                    <li><span style="font-family: Calibri, sans-serif;">View secrets under Vault and Shared paths and all their sub-paths&nbsp;</span></li>
+                </ul>
+            </li>
+            <li><span style="font-family: Calibri, sans-serif;">Group Name: <strong><em>{{ tev_env_L2_APMDU_ID_rw }}</em></strong>&nbsp;</span><br><span style="font-family: Calibri, sans-serif;">Purpose: Members of this security group will be able to,&nbsp;</span>
+                <ul>
+                    <li><span style="font-family: Calibri, sans-serif;">Create new secrets, new sub-path(s) under Vault path and Shared Path</span></li>
+                    <li><span style="font-family: Calibri, sans-serif;">Modify existing secrets under Vault and Shared paths and all their sub-paths</span></li>
+                    <li><span style="font-family: Calibri, sans-serif;">View secrets under Vault and Shared paths and all their sub-paths&nbsp;</span></li>
+                </ul>
+            </li>
+            <li><span style="font-family: Calibri, sans-serif;">Group Name: <strong><em>{{ tev_env_L2_APMDU_ID_ro }}&nbsp;</em></strong></span><br><span style="font-family: Calibri, sans-serif;">Purpose: Members of this security group will be able to,&nbsp;</span>
+                <ul>
+                    <li><span style="font-family: Calibri, sans-serif;">View secrets under Vault and Shared paths and all their sub-paths&nbsp;</span></li>
+                </ul>
+            </li>
+        </ul>
+        <p><span style="font-family: Calibri, sans-serif;">Once security groups are created in Active Directory, application team members can begin to request addition to one of the above groups using&nbsp;</span><a href="https://tmus.service-now.com/sp?id=sc_cat_item&sys_id=5724a9836f077100fd9277f16a3ee489"><span style="font-family: Calibri, sans-serif;">ServiceNow Group Access Request</span></a><span style="font-family: Calibri, sans-serif;">. As an application owner, you are responsible for reviewing &amp; approving all group access requests associated with your application.</span></p>
+        <p><br></p>
+        <p><span style="font-family: Calibri, sans-serif;"><strong><u>Note:</u></strong> Members of these group will have access to secrets stored in <em>Shared Path</em> and all <em>Vault Path(s)</em> associated with deployable units that are part of this application.</span><br></p>
+        <p><br><span style="font-family: Calibri, sans-serif;">Here is </span><a href="https://confluencesw.t-mobile.com/display/ATPF/Accessing+Vault"><span style="font-family: Calibri, sans-serif;">guide to accessing Vault</span></a><br></p>
+        <p><span style="font-family: Calibri, sans-serif;">If you have any questions or need technical assistance, please reach out to us via,</span></p>
+        <ul>
+            <li><span style="font-family: Calibri, sans-serif;">Slack: </span><a href="https://t-mo.slack.com/archives/CV0BGHY0Y"><span style="font-family: Calibri, sans-serif;">#vault_support</span></a></li>
+            <li><span style="font-family: Calibri, sans-serif;">Email: <a href="mailto:TEQAPSM_Vault_Support@T-Mobile.com">TEQAPSM_Vault_Support@T-Mobile.com</a></span><br></li>
+        </ul>
+        <p><span style="font-family: Calibri, sans-serif;">Thank you,</span></p>
+        <p><span style="font-family: Calibri, sans-serif;">TEQAPSM Vault Support</span></p>
+    </body>
+</html>
