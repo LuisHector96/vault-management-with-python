@@ -1,14 +1,16 @@
 {
   "onboarding": {
-    "enterprise-secrets-management-apm0201333": {
+
+    "enterprise-secrets-management-apm0000000": {
       "L2_APMID": "APM0201187",
       "L3_prefix_path": {
         "APM0201207": {
           "enable": true,
-          "name": "vault-ui"
+          "name": "TEQ ENTERPRISE VAULT UI"
         }
         
       }
     }
+    
   }
 }

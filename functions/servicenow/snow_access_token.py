@@ -56,7 +56,7 @@ def access_token(strPrivate, strPublic, clientID, clientScr):
     auth_header = "Basic " + base64.b64encode(
         (clientID + ":" + clientScr).encode("utf-8")
     ).decode("utf-8")
-    url = "https://core.saas.api.t-mobile.com/oauth2/v6/tokens"
+    url = "https://tmobilea-sb02.apigee.net/oauth2/v6/tokens"
     payload = json.dumps({})
     headers = {
         "X-Authorization": x_auth_header,

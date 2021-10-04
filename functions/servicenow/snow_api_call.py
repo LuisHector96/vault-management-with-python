@@ -1,12 +1,12 @@
 try:
-    from canvas_access_token import *
+    from snow_access_token import *
     import requests
     import json
 except Exception as e:
     print(str(e))
 
 
-def func_canvas_response(url, strPrivate, strPublic, clientID, clientScr):
+def func_snow_response(url, strPrivate, strPublic, clientID, clientScr):
 
     # access token has validity of 1 hour
     accessTok = access_token(strPrivate, strPublic, clientID, clientScr)
@@ -21,7 +21,7 @@ def func_canvas_response(url, strPrivate, strPublic, clientID, clientScr):
 
     response = requests.request("GET", url, headers=headers)
     # print(response.text)
-    return json.loads(response.text)
+    return response
 
 
 def main():
@@ -52,11 +52,17 @@ def main():
     clientID = keys.get("data").get("data").get("client_id_prd")
     clientScr = keys.get("data").get("data").get("secret_key_prd")
 
-    # APM0201187
-    url = "https://core.saas.api.t-mobile.com/api/asset-portfolio/v1/associated-repos?csdmNumber=APM0201187"
-
-    response = func_canvas_response(url, strPrivate, strPublic, clientID, clientScr)
-    print(json.dumps(response))
+    # https://tmobilea-sb02.apigee.net/api/asset-portfolio/v1/asset-ad-group/{csdm}
+    url = "https://tmobilea-sb02.apigee.net/api/asset-portfolio/v1/asset-ad-group/APM0225334?environment=development"
+    ad_request = func_canvas_response(url, strPrivate, strPublic, clientID, clientScr)
+    ad_request = ad_request.json()
+    try:
+        if ad_request.get("success"):
+            print(ad_request)
+        else:
+            print("failed, but proceed to slack")
+    except:
+        raise
 
 
 if __name__ == "__main__":

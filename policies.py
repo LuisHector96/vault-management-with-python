@@ -1,6 +1,6 @@
-#--------------------
+# --------------------
 # Policies Definition
-#--------------------
+# --------------------
 
 # Using GROUP_PATH & L2_APMID as the identifier for replacement with actual value
 Admin_policy = """
@@ -97,7 +97,7 @@ path "relic-kv/metadata" {
 """
 
 # L2 level policies
-L2_Policy_adm="""
+L2_Policy_adm = """
 path "tmobile/data/L2_APMID/shared/*"{
 capabilities = ["create", "read", "update", "delete", "list"]
 }
@@ -115,7 +115,7 @@ capabilities = ["update"]
 }
 """
 
-L2_Policy_rw="""
+L2_Policy_rw = """
 path "tmobile/data/L2_APMID/shared/*"{
 capabilities = ["create", "read", "update", "delete", "list"]
 }
@@ -124,7 +124,7 @@ capabilities = ["create", "read", "update", "list"]
 }
 """
 
-L2_Policy_ro="""
+L2_Policy_ro = """
 path "tmobile/data/L2_APMID/shared/*"{
 capabilities = ["read", "list"]
 }
@@ -133,7 +133,7 @@ capabilities = ["read", "list"]
 }
 """
 
-L3_Policy_pcf_adm="""
+L3_Policy_pcf_adm = """
 # PCF Privileged Role Management Delegation Policy
 # Name: pcf-L3_CSDMID-role-adm
 
@@ -150,10 +150,7 @@ path "auth/pcf/+/roles/L3_CSDMID" {
 
   allowed_parameters = {
     "token_policies" = [
-      "relic-L2_CSDMID",
-      "tev-L2_CSDMID-shared-ro",
-      "default",
-      "tev-L3_CSDMID-ro",
+      "POLICY_NAME",
     ]
 
     "*" = []

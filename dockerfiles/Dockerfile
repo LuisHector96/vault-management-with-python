@@ -2,7 +2,7 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
-ENV VAULT_VERSION="1.7.3"
+ENV VAULT_VERSION="1.8.2"
 
 # Quick Update and upgrade
 RUN apt update && apt upgrade -y
@@ -11,8 +11,7 @@ RUN apt update && apt upgrade -y
 RUN curl -sO https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
 RUN unzip vault_${VAULT_VERSION}_linux_amd64.zip
 RUN mv vault /usr/local/bin/
-RUN vault -autocomplete-install 
-#&& complete -C /usr/local/bin/vault vault
+RUN vault -autocomplete-install
 
 # Install job dependencies
 RUN apt-get update && apt-get install jq -y
@@ -24,11 +23,11 @@ RUN apt-get install build-essential python3-dev python2.7-dev \
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install cert for Vault connectivity
-COPY certificate.pem ./
-COPY add_cert.py ./
-RUN python add_cert.py
+ADD Additionals Additionals
+RUN mv Additionals/certificate.txt Additionals/certificate.pem
+RUN python Additionals/add_cert.py
+RUN cp Additionals/certificate.pem  /usr/local/share/ca-certificates/vault.crt && update-ca-certificates
 
-RUN python --version
 RUN vault version
 
-CMD ["python", "Automation_Onboarding.py"]
+CMD ["python", "--version"]
